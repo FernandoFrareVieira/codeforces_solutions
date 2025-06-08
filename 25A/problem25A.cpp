@@ -6,39 +6,28 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int n, x, fp, lp;
-    bool flg = false;
+    int n, a, pos_odd, pos_even;
+    int even = 0, odd = 0;
 
     cin >> n;
 
-    vector<int> v(n);
-
     for(int i = 0; i < n; i++) {
-        cin >> x;
-        v[i] = x;
+        cin >> a;
+
+        if(a % 2 != 0) {
+            odd++;
+            pos_odd = i + 1;
+        }else {
+            even++; 
+            pos_even = i + 1;
+        }
     }
 
-    for(int i = 1; i < n-1; i++) {
-        if(v[i] > v[i-1] && v[i] < v[i+1]) {
-            fp = i+1;
-            for(int j = i+1; j < n-1; j++) {
-                if(v[j] <= v[j-1] && v[j] >= v[j+1]) {  
-                    lp = j+1;
-
-                    flg = true;
-                    break;
-                }
-            }
-        }
-
-        if(!flg) {
-            lp = n - 1;
-        }
-        
-        break;
+    if(even > odd) {
+        cout << pos_odd << endl;
+    }else {
+        cout << pos_even << endl;
     }
-
-    cout << (lp + fp) / 2 << endl;
 
     return 0;
 }
